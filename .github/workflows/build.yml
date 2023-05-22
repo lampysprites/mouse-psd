@@ -107,6 +107,10 @@ jobs:
         name: runtime-linux
         path: build/linux
     - name: Pack everything together
+      uses: actions/upload-artifact@v3
+      with:
+        name: runtimes
+        path: build
         
         
   exporter-windows:
@@ -123,13 +127,17 @@ jobs:
       run: pip install -r requirements.txt
     - name: Install PyInstaller
       run: pip install -U pyinstaller
-      
+    - name: Get runtimes
+      uses: actions/download-artifact@v3
+      with:
+        name: runtimes
+        path: build
     - name: Create PyInstaller distribution
       run: pyinstaller.exe mouse.py -w --workpath pybuild --add-data "build;build" --add-data "tools;tools" --icon icon.png
     - name: Procure results
       uses: actions/upload-artifact@v3
       with:
-        name: runtime-windows
+        name: exporter-windows
         path: dist
     
     
