@@ -6,7 +6,7 @@ on:
       test-build
 
 jobs:
-  build:
+  runtime-windows:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v1
@@ -22,8 +22,9 @@ jobs:
         name: runtime-windows
         path: build/windows
 
-  exporter:
+  exporter-windows:
     runs-on: windows-latest
+    needs: runtime-windows
     steps:
     - uses: actions/checkout@v1
     - name: Install Python
