@@ -58,27 +58,27 @@ jobs:
         name: runtime-osx
         path: build/osx
         
-#   runtime-linux:
-#     runs-on: ubuntu-latest
-#     steps:
-#     - uses: actions/checkout@v1
-#     - name: Apt Update
-#       run: sudo apt-get update
-#     - name: Apt Install
-#       run: sudo apt-get install libasound2-dev libxinerama-dev libxrandr-dev libgl1-mesa-dev libxi-dev libxcursor-dev libudev-dev --yes --quiet
-#     - name: Get Submodules
-#       run: git submodule update --init --recursive --depth 1
-#     - name: Get Node.js
-#       run: git clone https://github.com/Kode/nodejs_bin.git --depth 1
-#     - name: Setup Node.js
-#       run: nodejs_bin/copysysbin.sh
-#     - name: Compile
-#       run: nodejs_bin/node Kha/make -g opengl --compile
-#     - name: Procure results
-#       uses: actions/upload-artifact@v3
-#       with:
-#         name: runtime-linux
-#         path: build/linux
+  runtime-linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Apt Update
+      run: sudo apt-get update
+    - name: Apt Install
+      run: sudo apt-get install libasound2-dev libxinerama-dev libxrandr-dev libgl1-mesa-dev libxi-dev libxcursor-dev libudev-dev --yes --quiet
+    - name: Get Submodules
+      run: git submodule update --init --recursive --depth 1
+    - name: Get Node.js
+      run: git clone https://github.com/Kode/nodejs_bin.git --depth 1
+    - name: Setup Node.js
+      run: nodejs_bin/copysysbin.sh
+    - name: Compile
+      run: nodejs_bin/node Kha/make -g opengl --compile
+    - name: Procure results
+      uses: actions/upload-artifact@v3
+      with:
+        name: runtime-linux
+        path: build/linux
         
 
 #   exporter-windows:
