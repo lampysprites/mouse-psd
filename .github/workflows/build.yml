@@ -40,23 +40,23 @@ jobs:
         name: runtime-html5
         path: build/html5
         
-#   runtime-osx:  
-#     runs-on: macOS-latest
-#     steps:
-#     - uses: actions/checkout@v1
-#     - name: Get Submodules
-#       run: git submodule update --init --recursive --depth 1
-#     - name: Get Node.js
-#       run: git clone https://github.com/Kode/nodejs_bin.git --depth 1
-#     - name: Setup Node.js
-#       run: nodejs_bin/copysysbin.sh
-#     - name: Compile
-#       run: nodejs_bin/node Kha/make --compile
-#     - name: Procure results
-#       uses: actions/upload-artifact@v3
-#       with:
-#         name: runtime-osx
-#         path: build/osx
+  runtime-osx:  
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Get Submodules
+      run: git submodule update --init --recursive --depth 1
+    - name: Get Node.js
+      run: git clone https://github.com/Kode/nodejs_bin.git --depth 1
+    - name: Setup Node.js
+      run: nodejs_bin/copysysbin.sh
+    - name: Compile
+      run: nodejs_bin/node Kha/make --compile
+    - name: Procure results
+      uses: actions/upload-artifact@v3
+      with:
+        name: runtime-osx
+        path: build/osx
         
 #   runtime-linux:
 #     runs-on: ubuntu-latest
