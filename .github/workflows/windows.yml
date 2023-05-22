@@ -1,6 +1,9 @@
 name: Windows (OpenGL)
 
-on: workflow_dispatch
+on:
+  push:
+    branches:
+      test-build
 
 jobs:
   build:
