@@ -56,7 +56,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: runtime-osx
-        path: build/osx
+        path: build/
         
   runtime-linux:
     runs-on: ubuntu-latest
