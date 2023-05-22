@@ -43,5 +43,10 @@ jobs:
         path: build/windows
     - name: Create PyInstaller distribution
       run: pyinstaller.exe mouse.py -w --workpath pybuild --add-data "build;build" --add-data "tools;tools" --icon icon.png
+    - name: Procure results
+      uses: actions/upload-artifact@v3
+      with:
+        name: runtime-windows
+        path: dist
     
     
