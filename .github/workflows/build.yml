@@ -40,87 +40,87 @@ jobs:
         name: runtime-html5
         path: build/html5
         
-  runtime-osx:  
-    runs-on: macOS-latest
-    steps:
-    - uses: actions/checkout@v1
-    - name: Get Submodules
-      run: git submodule update --init --recursive --depth 1
-    - name: Get Node.js
-      run: git clone https://github.com/Kode/nodejs_bin.git --depth 1
-    - name: Setup Node.js
-      run: nodejs_bin/copysysbin.sh
-    - name: Compile
-      run: nodejs_bin/node Kha/make --compile
-    - name: Procure results
-      uses: actions/upload-artifact@v3
-      with:
-        name: runtime-osx
-        path: build/osx
+#   runtime-osx:  
+#     runs-on: macOS-latest
+#     steps:
+#     - uses: actions/checkout@v1
+#     - name: Get Submodules
+#       run: git submodule update --init --recursive --depth 1
+#     - name: Get Node.js
+#       run: git clone https://github.com/Kode/nodejs_bin.git --depth 1
+#     - name: Setup Node.js
+#       run: nodejs_bin/copysysbin.sh
+#     - name: Compile
+#       run: nodejs_bin/node Kha/make --compile
+#     - name: Procure results
+#       uses: actions/upload-artifact@v3
+#       with:
+#         name: runtime-osx
+#         path: build/osx
         
-  runtime-linux:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - name: Apt Update
-      run: sudo apt-get update
-    - name: Apt Install
-      run: sudo apt-get install libasound2-dev libxinerama-dev libxrandr-dev libgl1-mesa-dev libxi-dev libxcursor-dev libudev-dev --yes --quiet
-    - name: Get Submodules
-      run: git submodule update --init --recursive --depth 1
-    - name: Get Node.js
-      run: git clone https://github.com/Kode/nodejs_bin.git --depth 1
-    - name: Setup Node.js
-      run: nodejs_bin/copysysbin.sh
-    - name: Compile
-      run: nodejs_bin/node Kha/make -g opengl --compile
-    - name: Procure results
-      uses: actions/upload-artifact@v3
-      with:
-        name: runtime-linux
-        path: build/linux
+#   runtime-linux:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@v1
+#     - name: Apt Update
+#       run: sudo apt-get update
+#     - name: Apt Install
+#       run: sudo apt-get install libasound2-dev libxinerama-dev libxrandr-dev libgl1-mesa-dev libxi-dev libxcursor-dev libudev-dev --yes --quiet
+#     - name: Get Submodules
+#       run: git submodule update --init --recursive --depth 1
+#     - name: Get Node.js
+#       run: git clone https://github.com/Kode/nodejs_bin.git --depth 1
+#     - name: Setup Node.js
+#       run: nodejs_bin/copysysbin.sh
+#     - name: Compile
+#       run: nodejs_bin/node Kha/make -g opengl --compile
+#     - name: Procure results
+#       uses: actions/upload-artifact@v3
+#       with:
+#         name: runtime-linux
+#         path: build/linux
         
 
-  exporter-windows:
-    runs-on: windows-latest
-    needs: [runtime-html5, runtime-windows, runtime-osx, runtime-linux]
-    steps:
-    - uses: actions/checkout@v1
-    - name: Install Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
-        cache: 'pip' # caching pip dependencies
-    - name: Install exporter deps
-      run: pip install -r requirements.txt
-    - name: Install PyInstaller
-      run: pip install -U pyinstaller
-    - name: Get HTML5 runtimes
-      uses: actions/download-artifact@v3
-      with:
-        name: runtime-html5
-        path: build/html5
-    - name: Get Windows runtimes
-    - uses: actions/download-artifact@v3
-      with:
-        name: runtime-windows
-        path: build/windows
-    - name: Get OSX runtimes
-    - uses: actions/download-artifact@v3
-      with:
-        name: runtime-osx
-        path: build/osx
-    - name: Get Lunix runtimes
-    - uses: actions/download-artifact@v3
-      with:
-        name: runtime-linux
-        path: build/linux
-    - name: Create PyInstaller distribution
-      run: pyinstaller.exe mouse.py -w --workpath pybuild --add-data "build;build" --add-data "tools;tools" --icon icon.png
-    - name: Procure results
-      uses: actions/upload-artifact@v3
-      with:
-        name: runtime-windows
-        path: dist
+#   exporter-windows:
+#     runs-on: windows-latest
+#     needs: [runtime-html5, runtime-windows, runtime-osx, runtime-linux]
+#     steps:
+#     - uses: actions/checkout@v1
+#     - name: Install Python
+#       uses: actions/setup-python@v4
+#       with:
+#         python-version: '3.10'
+#         cache: 'pip' # caching pip dependencies
+#     - name: Install exporter deps
+#       run: pip install -r requirements.txt
+#     - name: Install PyInstaller
+#       run: pip install -U pyinstaller
+#     - name: Get HTML5 runtimes
+#       uses: actions/download-artifact@v3
+#       with:
+#         name: runtime-html5
+#         path: build/html5
+#     - name: Get Windows runtimes
+#     - uses: actions/download-artifact@v3
+#       with:
+#         name: runtime-windows
+#         path: build/windows
+#     - name: Get OSX runtimes
+#     - uses: actions/download-artifact@v3
+#       with:
+#         name: runtime-osx
+#         path: build/osx
+#     - name: Get Lunix runtimes
+#     - uses: actions/download-artifact@v3
+#       with:
+#         name: runtime-linux
+#         path: build/linux
+#     - name: Create PyInstaller distribution
+#       run: pyinstaller.exe mouse.py -w --workpath pybuild --add-data "build;build" --add-data "tools;tools" --icon icon.png
+#     - name: Procure results
+#       uses: actions/upload-artifact@v3
+#       with:
+#         name: runtime-windows
+#         path: dist
     
     
