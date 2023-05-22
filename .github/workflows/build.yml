@@ -6,83 +6,83 @@ on:
       test-build
 
 jobs:
-#   runtime-windows:
-#     runs-on: windows-latest
-#     steps:
-#     - uses: actions/checkout@v1
-#     - name: Get Submodules
-#       run: git submodule update --init --recursive --depth 1
-#     - name: Get Node.js
-#       run: git clone https://github.com/Kode/nodejs_bin.git --depth 1
-#     - name: Compile
-#       run: .\nodejs_bin\node.exe Kha/make --compile
-#     - name: Procure results
-#       uses: actions/upload-artifact@v3
-#       with:
-#         name: runtime-windows
-#         path: build/windows
+  runtime-windows:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Get Submodules
+      run: git submodule update --init --recursive --depth 1
+    - name: Get Node.js
+      run: git clone https://github.com/Kode/nodejs_bin.git --depth 1
+    - name: Compile
+      run: .\nodejs_bin\node.exe Kha/make --compile
+    - name: Procure results
+      uses: actions/upload-artifact@v3
+      with:
+        name: runtime-windows
+        path: build/windows
         
-#   runtime-html5:
-#     runs-on: ubuntu-latest
-#     steps:
-#     - uses: actions/checkout@v1
-#     - name: Get Submodules
-#       run: git submodule update --init --recursive --depth 1
-#     - name: Get Node.js
-#       run: git clone https://github.com/Kode/nodejs_bin.git --depth 1
-#     - name: Setup Node.js
-#       run: nodejs_bin/copysysbin.sh
-#     - name: Compile
-#       run: nodejs_bin/node Kha/make html5
-#     - name: Procure results
-#       uses: actions/upload-artifact@v3
-#       with:
-#         name: runtime-html5
-#         path: build/html5
+  runtime-html5:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Get Submodules
+      run: git submodule update --init --recursive --depth 1
+    - name: Get Node.js
+      run: git clone https://github.com/Kode/nodejs_bin.git --depth 1
+    - name: Setup Node.js
+      run: nodejs_bin/copysysbin.sh
+    - name: Compile
+      run: nodejs_bin/node Kha/make html5
+    - name: Procure results
+      uses: actions/upload-artifact@v3
+      with:
+        name: runtime-html5
+        path: build/html5
         
-#   runtime-osx:  
-#     runs-on: macOS-latest
-#     steps:
-#     - uses: actions/checkout@v1
-#     - name: Get Submodules
-#       run: git submodule update --init --recursive --depth 1
-#     - name: Get Node.js
-#       run: git clone https://github.com/Kode/nodejs_bin.git --depth 1
-#     - name: Setup Node.js
-#       run: nodejs_bin/copysysbin.sh
-#     - name: Compile
-#       run: nodejs_bin/node Kha/make --compile
-#     - name: Procure results
-#       uses: actions/upload-artifact@v3
-#       with:
-#         name: runtime-osx
-#         path: build/osx
+  runtime-osx:  
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Get Submodules
+      run: git submodule update --init --recursive --depth 1
+    - name: Get Node.js
+      run: git clone https://github.com/Kode/nodejs_bin.git --depth 1
+    - name: Setup Node.js
+      run: nodejs_bin/copysysbin.sh
+    - name: Compile
+      run: nodejs_bin/node Kha/make --compile
+    - name: Procure results
+      uses: actions/upload-artifact@v3
+      with:
+        name: runtime-osx
+        path: build/osx
         
-#   runtime-linux:
-#     runs-on: ubuntu-latest
-#     steps:
-#     - uses: actions/checkout@v1
-#     - name: Apt Update
-#       run: sudo apt-get update
-#     - name: Apt Install
-#       run: sudo apt-get install libasound2-dev libxinerama-dev libxrandr-dev libgl1-mesa-dev libxi-dev libxcursor-dev libudev-dev libxkbcommon-dev --yes
-#     - name: Get Submodules
-#       run: git submodule update --init --recursive --depth 1
-#     - name: Get Node.js
-#       run: git clone https://github.com/Kode/nodejs_bin.git --depth 1
-#     - name: Setup Node.js
-#       run: nodejs_bin/copysysbin.sh
-#     - name: Compile
-#       run: nodejs_bin/node Kha/make -g opengl --compile
-#     - name: Procure results
-#       uses: actions/upload-artifact@v3
-#       with:
-#         name: runtime-linux
-#         path: build/linux
+  runtime-linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Apt Update
+      run: sudo apt-get update
+    - name: Apt Install
+      run: sudo apt-get install libasound2-dev libxinerama-dev libxrandr-dev libgl1-mesa-dev libxi-dev libxcursor-dev libudev-dev libxkbcommon-dev --yes
+    - name: Get Submodules
+      run: git submodule update --init --recursive --depth 1
+    - name: Get Node.js
+      run: git clone https://github.com/Kode/nodejs_bin.git --depth 1
+    - name: Setup Node.js
+      run: nodejs_bin/copysysbin.sh
+    - name: Compile
+      run: nodejs_bin/node Kha/make -g opengl --compile
+    - name: Procure results
+      uses: actions/upload-artifact@v3
+      with:
+        name: runtime-linux
+        path: build/linux
   
   runtime-combine:
     runs-on: ubuntu-latest    
-#     needs: [runtime-html5, runtime-windows, runtime-osx, runtime-linux]
+    needs: [runtime-html5, runtime-windows, runtime-osx, runtime-linux]
     steps:
     - name: create folder
       run: mkdir build
