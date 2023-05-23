@@ -54,6 +54,8 @@ jobs:
       run: nodejs_bin/node Kha/make --compile
     - name: Move folders
       run: mv build/osx-build/build/Release/MousePSD.app build/osx/MousePSD.app
+    - name: Fix permissions
+      run: chmod +x build/osx/MousePSD.app/Contents/MacOS/MousePSD && chmod +x build/osx/MousePSD.app
     - name: Procure results
       uses: actions/upload-artifact@v3
       with:
