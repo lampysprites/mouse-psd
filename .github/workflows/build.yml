@@ -78,6 +78,8 @@ jobs:
       run: nodejs_bin/copysysbin.sh
     - name: Compile
       run: nodejs_bin/node Kha/make -g opengl --compile
+    - name: FIx permissions
+      run: chmod +x build/linux/MousePSD
     - name: Procure results
       uses: actions/upload-artifact@v3
       with:
