@@ -1,5 +1,6 @@
 const project = new Project('MousePSD');
 
+project.addAssets('Assets/**');
 project.addSources('Sources');
 project.icon = 'icon.png';
 
